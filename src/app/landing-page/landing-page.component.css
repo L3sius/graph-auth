@@ -1,0 +1,33 @@
+#card {
+  margin: 0;
+  padding: 30px 50px 30px 50px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  text-align: center;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  background-color: #ffffff;
+  border-radius: 25px;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+}
+
+#cardProceedButton {
+  margin-block-start: 0.67em;
+  margin-block-end: 0.67em;
+  background-color: #00adb5;
+  border-radius: 25px;
+  font-size: 13px;
+  padding: 0 20px 0 20px;
+}
+
+.customH1 {
+  color: #707070;
+  font-weight: bold;
+  font-size: 26px;
+}
+
+.customP {
+  color: #707070;
+  font-size: 16px;
+}
