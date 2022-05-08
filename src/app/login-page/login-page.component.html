@@ -31,6 +31,7 @@
           <mat-label>Select your category: </mat-label>
           <mat-form-field appearance="outline" [style.width.px]="300">
             <mat-select
+              (selectionChange)="onSelectChange($event)"
               id="categorySelect"
               disableOptionCentering
               placeholder="Category"
@@ -45,6 +46,30 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
+        </div>
+
+        <div *ngIf="selectedType == 'food'">
+          <input type="checkbox" id="1" (change)="onCheckboxChange($event)" />
+          <label for="1">
+            <img
+              alt="Image of food"
+              src="https://source.unsplash.com/user/c_v_r/100x100"
+            />
+          </label>
+          <input type="checkbox" id="2" (change)="onCheckboxChange($event)" />
+          <label for="2">
+            <img
+              alt="Image of food"
+              src="https://source.unsplash.com/user/c_v_r/100x100"
+            />
+          </label>
+          <input type="checkbox" id="3" (change)="onCheckboxChange($event)" />
+          <label for="3">
+            <img
+              alt="Image of food"
+              src="https://source.unsplash.com/user/c_v_r/100x100"
+            />
+          </label>
         </div>
 
         <button
