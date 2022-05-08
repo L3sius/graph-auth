@@ -8,6 +8,11 @@ import { MatSliderModule } from '@angular/material/slider';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
+import { HomePageComponent } from './home-page/home-page.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -15,6 +20,7 @@ import { RegisterPageComponent } from './register-page/register-page.component';
     LoginPageComponent,
     LandingPageComponent,
     RegisterPageComponent,
+    HomePageComponent,
   ],
   imports: [
     BrowserModule,
@@ -22,7 +28,11 @@ import { RegisterPageComponent } from './register-page/register-page.component';
     MatButtonModule,
     BrowserAnimationsModule,
     MatSliderModule,
+    MatFormFieldModule,
     AppRoutingModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatSelectModule,
   ],
   exports: [MatButtonModule, BrowserAnimationsModule],
   providers: [],

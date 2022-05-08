@@ -1,22 +1,72 @@
 .layout {
-  width: 1366px;
+  width: auto;
   height: 768px;
-
   display: grid;
   grid:
     "header" auto
     "main" 1fr
-    "footer" auto
     / 1fr;
   gap: 8px;
 }
 
+#card {
+  margin: 0;
+  padding: 30px 50px 30px 50px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  text-align: center;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  background-color: #ffffff;
+  border-radius: 25px;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+}
+
 .header {
   grid-area: header;
+  text-align: right;
 }
 .main {
   grid-area: main;
+  background-color: blue;
 }
-.footer {
-  grid-area: footer;
+
+.child {
+  display: inline-block;
+  padding: 5px;
+  vertical-align: middle;
+}
+
+.customP {
+  color: #707070;
+  font-size: 16px;
+  margin-block-start: 0.67em;
+  margin-block-end: 0.67em;
+}
+
+.form {
+  position: relative;
+  width: 100%;
+  z-index: 1;
+  padding: 20px;
+  background-color: #dbc7da;
+  border: #191016;
+  border-style: solid;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-group {
+  color: #707070;
+  font-size: 13px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+}
+
+::ng-deep .mat-select-value {
+  color: #707070 !important;
 }

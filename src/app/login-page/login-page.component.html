@@ -1,5 +1,62 @@
 <section class="layout">
-  <div class="header">1</div>
-  <div class="main">2</div>
-  <div class="footer">3</div>
+  <div class="header">
+    <div class="child"><p class="customP">Don't have an account?</p></div>
+    <div class="child">
+      <button
+        id="cardButton"
+        mat-raised-button
+        color="primary"
+        routerLink="/register-page"
+      >
+        REGISTER
+      </button>
+    </div>
+  </div>
+  <div class="main">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)">
+      <div id="card">
+        <h1 id="customTitle">Login to your account</h1>
+
+        <div class="form-group">
+          <mat-label>Enter your email: </mat-label>
+          <mat-form-field appearance="outline" [style.width.px]="300">
+            <input matInput placeholder="Email" formControlName="email" />
+            <mat-error *ngIf="loginForm.controls.email.errors"
+              >Username should contain atleast 6 characters</mat-error
+            >
+          </mat-form-field>
+        </div>
+
+        <div class="form-group">
+          <mat-label>Select your category: </mat-label>
+          <mat-form-field appearance="outline" [style.width.px]="300">
+            <mat-select
+              id="categorySelect"
+              disableOptionCentering
+              placeholder="Category"
+              formControlName="category"
+            >
+              <mat-option
+                style="color: #707070"
+                *ngFor="let category of categories"
+                [value]="category.value"
+              >
+                {{ category.viewValue }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <button
+          id="cardButton"
+          mat-raised-button
+          [disabled]="!loginForm.valid"
+          type="submit"
+          color="primary"
+        >
+          LOGIN
+        </button>
+      </div>
+    </form>
+  </div>
 </section>
