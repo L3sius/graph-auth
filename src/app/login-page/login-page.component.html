@@ -17,7 +17,7 @@
       <div id="card">
         <h1 id="customTitle">Login to your account</h1>
 
-        <div class="form-group">
+        <div class="form-group" style="align-items: center">
           <mat-label>Enter your email: </mat-label>
           <mat-form-field appearance="outline" [style.width.px]="300">
             <input matInput placeholder="Email" formControlName="email" />
@@ -27,24 +27,80 @@
           </mat-form-field>
         </div>
 
-        <div class="form-group">
+        <div class="form-group" style="align-items: center">
           <mat-label>Select your category: </mat-label>
           <mat-form-field appearance="outline" [style.width.px]="300">
             <mat-select
+              (selectionChange)="onSelectChange($event)"
               id="categorySelect"
               disableOptionCentering
               placeholder="Category"
               formControlName="category"
             >
               <mat-option
-                style="color: #707070"
                 *ngFor="let category of categories"
                 [value]="category.value"
+                [disabled]="!category.isEnabled"
               >
                 {{ category.viewValue }}
               </mat-option>
             </mat-select>
           </mat-form-field>
+        </div>
+
+        <div class="imageContainer" *ngIf="selectedType === 'animals'">
+          <label
+            formArrayName="images"
+            *ngFor="let image of imagesFormArray.controls; let i = index"
+          >
+            <input
+              style="display: none"
+              #checkboxes
+              type="checkbox"
+              [formControlName]="i"
+              (change)="onCheckboxChange(i, $event)"
+            />
+            <div class="imgHolder">
+              <img
+                width="100"
+                height="100"
+                style="margin: 0 5px 0 5px"
+                alt="Image of an animal"
+                src="{{ animalsData[i].url }}"
+              />
+              <ng-container *ngFor="let id of password; let j = index">
+                <span
+                  matBadge="{{ j + 1 }}"
+                  matBadgePosition="before"
+                  matBadgeColor="primary"
+                  *ngIf="i === id"
+                ></span>
+              </ng-container>
+            </div>
+          </label>
+        </div>
+        <div class="imageContainer" *ngIf="selectedType === 'food'">
+          <label
+            formArrayName="images"
+            *ngFor="let image of imagesFormArray.controls; let i = index"
+          >
+            <input
+              style="display: none"
+              #checkboxes
+              type="checkbox"
+              [formControlName]="i"
+              (change)="onCheckboxChange(i, $event)"
+            />
+            <div class="imgHolder">
+              <img
+                width="100"
+                height="100"
+                style="margin: 0 5px 0 5px"
+                alt="Image of a food"
+                src="{{ foodData[i].url }}"
+              />
+            </div>
+          </label>
         </div>
 
         <button

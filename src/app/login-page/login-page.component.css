@@ -29,7 +29,6 @@
 }
 .main {
   grid-area: main;
-  background-color: blue;
 }
 
 .child {
@@ -69,4 +68,39 @@
 
 ::ng-deep .mat-select-value {
   color: #707070 !important;
+}
+
+.imageContainer {
+  max-width: 500px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+img {
+  border: 3px solid black;
+}
+
+.container {
+  position: relative;
+  text-align: center;
+  color: black;
+  max-width: 100px;
+  max-height: 100px;
+}
+
+/* Top right text */
+.top-right {
+  position: absolute;
+  top: 8px;
+  right: 16px;
+}
+
+.imgHolder {
+  position: relative;
+  max-width: 100px;
+}
+.imgHolder span {
+  position: absolute;
+  right: 10px;
+  top: 10px;
 }
