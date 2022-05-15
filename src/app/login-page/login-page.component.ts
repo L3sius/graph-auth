@@ -2,6 +2,7 @@ import { Component, ViewChildren, QueryList, ElementRef } from '@angular/core';
 import { FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginContent } from '../models/LoginContent';
+import { AuthService } from '../shared/services/auth.service';
 
 interface Category {
   value: string;
@@ -110,8 +111,6 @@ export class LoginPageComponent {
   selectedType = '';
   password = new Array();
 
-  //TODO: Add authentication
-  //private token: string;
   categories: Category[] = [
     { value: 'food', viewValue: 'Food', isEnabled: true },
     { value: 'animals', viewValue: 'Animals', isEnabled: true },
@@ -124,7 +123,7 @@ export class LoginPageComponent {
     { value: 'logos', viewValue: 'Logos', isEnabled: false },
   ];
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, public authService: AuthService) {}
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({
@@ -196,20 +195,6 @@ export class LoginPageComponent {
       password,
     };
 
-    console.log(loginContent);
-
-    // this.router.navigate(['home-page']);
-
-    //TODO: Add authentication later
-    //this.authService.logIn(user).subscribe(
-    //   (response) => {
-    //     sessionStorage.setItem('authorization', response.body);
-    //     this.location.replaceState('/');
-    //     this.router.navigate(['self-service-page']);
-    //   },
-    //   (error) => {
-    //     console.log(error.status);
-    //   }
-    //);
+    this.authService.SignIn(email, category + password);
   }
 }

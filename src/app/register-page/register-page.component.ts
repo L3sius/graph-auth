@@ -8,6 +8,7 @@ import {
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RegisterContent } from '../models/RegisterContent';
+import { AuthService } from '../shared/services/auth.service';
 
 interface Category {
   value: string;
@@ -131,7 +132,7 @@ export class RegisterPageComponent implements OnInit {
     { value: 'logos', viewValue: 'Logos', isEnabled: false },
   ];
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, public authService: AuthService) {}
 
   ngOnInit(): void {
     this.registerForm = new FormGroup({
@@ -208,20 +209,6 @@ export class RegisterPageComponent implements OnInit {
       password,
     };
 
-    console.log(registerContent);
-
-    // this.router.navigate(['home-page']);
-
-    //TODO: Add authentication later
-    //this.authService.logIn(user).subscribe(
-    //   (response) => {
-    //     sessionStorage.setItem('authorization', response.body);
-    //     this.location.replaceState('/');
-    //     this.router.navigate(['self-service-page']);
-    //   },
-    //   (error) => {
-    //     console.log(error.status);
-    //   }
-    //);
+    this.authService.SignUp(email, category + password);
   }
 }

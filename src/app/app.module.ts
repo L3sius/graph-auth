@@ -16,6 +16,13 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatBadgeModule } from '@angular/material/badge';
 import { TwofactorActivationPageComponent } from './twofactor-activation-page/twofactor-activation-page.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { environment } from '../environments/environment';
+import { AuthService } from './shared/services/auth.service';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 
 @NgModule({
   declarations: [
@@ -39,9 +46,14 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatSelectModule,
     MatBadgeModule,
     MatTooltipModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AngularFirestoreModule,
+    AngularFireStorageModule,
+    AngularFireDatabaseModule,
   ],
   exports: [MatButtonModule, BrowserAnimationsModule],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

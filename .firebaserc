@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "fir-angular-auth-9a446"
+  },
+  "targets": {
+    "fir-angular-auth-9a446": {
+      "hosting": {
+        "graph-auth": [
+          "fir-angular-auth-9a446"
+        ]
+      }
+    }
+  }
+}
