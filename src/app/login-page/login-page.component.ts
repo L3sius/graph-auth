@@ -1,7 +1,7 @@
 import { Component, ViewChildren, QueryList, ElementRef } from '@angular/core';
 import { FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
-import { User } from '../models/user';
+import { LoginContent } from '../models/LoginContent';
 
 interface Category {
   value: string;
@@ -110,8 +110,6 @@ export class LoginPageComponent {
   selectedType = '';
   password = new Array();
 
-  test = new Array(10);
-
   //TODO: Add authentication
   //private token: string;
   categories: Category[] = [
@@ -130,16 +128,10 @@ export class LoginPageComponent {
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({
-      email: new FormControl(null, [
-        Validators.required,
-        Validators.minLength(6),
-        Validators.maxLength(30),
-      ]),
+      email: new FormControl(null, [Validators.required, Validators.email]),
       category: new FormControl(null, Validators.required),
       images: new FormArray([]),
     });
-
-    this.addCheckboxes();
   }
 
   onSelectChange(event: any) {
@@ -148,18 +140,12 @@ export class LoginPageComponent {
   }
 
   unCheckAll() {
-    this.checkboxes.forEach((element) => {
-      element.nativeElement.checked = false;
-      this.password.length = 0;
-    });
+    this.password.length = 0;
+    this.removeCheckboxes();
+    this.addCheckboxes();
   }
 
   onCheckboxChange(id: any, event: any) {
-    console.log(event);
-    console.log(id);
-    // console.log(event.srcElement.id);
-    console.log(event.target.checked);
-
     this.updatePasswordArray(id, event.target.checked);
   }
 
@@ -167,32 +153,42 @@ export class LoginPageComponent {
     this.foodData.forEach(() =>
       this.imagesFormArray.push(new FormControl(false))
     );
-    // this.animalsData.forEach(() =>
-    //   this.animalsFormArray.push(new FormControl(false))
-    // );
+  }
+
+  private removeCheckboxes() {
+    this.foodData.forEach(() => this.imagesFormArray.clear());
   }
 
   updatePasswordArray(element: number, isChecked: boolean) {
     console.log(element);
     if (isChecked) {
       this.password.push(element);
-      console.log(this.password);
     } else {
       const index = this.password.indexOf(element, 0);
       if (index > -1) {
         this.password.splice(index, 1);
-        console.log(this.password);
       }
     }
   }
 
-  onSubmit(user: User) {
+  onSubmit() {
     if (this.loginForm.invalid) {
       return;
     }
 
-    console.log(user);
-    // this.router.navigate(['home-page']);
+    var email = this.loginForm.get('email').value;
+    var category = this.loginForm.get('category').value;
+    var password = this.password.toString().replace(/,/g, '');
+
+    var loginContent: LoginContent = {
+      email,
+      category,
+      password,
+    };
+
+    console.log(loginContent);
+
+    this.router.navigate(['home-page']);
 
     //TODO: Add authentication later
     //this.authService.logIn(user).subscribe(

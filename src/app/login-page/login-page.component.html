@@ -12,8 +12,9 @@
       </button>
     </div>
   </div>
+
   <div class="main">
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <div id="card">
         <h1 id="customTitle">Login to your account</h1>
 
@@ -21,8 +22,14 @@
           <mat-label>Enter your email: </mat-label>
           <mat-form-field appearance="outline" [style.width.px]="300">
             <input matInput placeholder="Email" formControlName="email" />
-            <mat-error *ngIf="loginForm.controls.email.errors"
-              >Username should contain atleast 6 characters</mat-error
+            <mat-hint *ngIf="loginForm.get('email').hasError('required')"
+              >Email is required</mat-hint
+            >
+            <mat-error *ngIf="loginForm.get('email').hasError('required')"
+              >Email is required</mat-error
+            >
+            <mat-error *ngIf="loginForm.get('email').hasError('email')"
+              >Email should follow structure: email@domain</mat-error
             >
           </mat-form-field>
         </div>
@@ -45,6 +52,12 @@
                 {{ category.viewValue }}
               </mat-option>
             </mat-select>
+            <mat-hint *ngIf="loginForm.get('category').hasError('required')"
+              >Category is required</mat-hint
+            >
+            <mat-error *ngIf="loginForm.get('category').hasError('required')"
+              >Category is required</mat-error
+            >
           </mat-form-field>
         </div>
 
@@ -55,7 +68,6 @@
           >
             <input
               style="display: none"
-              #checkboxes
               type="checkbox"
               [formControlName]="i"
               (change)="onCheckboxChange(i, $event)"
@@ -79,6 +91,7 @@
             </div>
           </label>
         </div>
+
         <div class="imageContainer" *ngIf="selectedType === 'food'">
           <label
             formArrayName="images"
@@ -86,6 +99,35 @@
           >
             <input
               style="display: none"
+              type="checkbox"
+              [formControlName]="i"
+              (change)="onCheckboxChange(i, $event)"
+            />
+            <div class="imgHolder">
+              <img
+                width="100"
+                height="100"
+                style="margin: 0 5px 0 5px"
+                alt="Image of a food"
+                src="{{ foodData[i].url }}"
+              />
+              <ng-container *ngFor="let id of password; let j = index">
+                <span
+                  matBadge="{{ j + 1 }}"
+                  matBadgePosition="before"
+                  matBadgeColor="primary"
+                  *ngIf="i === id"
+                ></span>
+              </ng-container>
+            </div>
+          </label>
+        </div>
+        <!-- <div class="imageContainer" *ngIf="selectedType === 'food'">
+          <label
+            formArrayName="images"
+            *ngFor="let image of imagesFormArray.controls; let i = index"
+          >
+            <input
               #checkboxes
               type="checkbox"
               [formControlName]="i"
@@ -99,14 +141,22 @@
                 alt="Image of a food"
                 src="{{ foodData[i].url }}"
               />
+              <ng-container *ngFor="let id of password; let j = index">
+                <span
+                  matBadge="{{ j + 1 }}"
+                  matBadgePosition="before"
+                  matBadgeColor="primary"
+                  *ngIf="i === id"
+                ></span>
+              </ng-container>
             </div>
           </label>
-        </div>
+        </div> -->
 
         <button
           id="cardButton"
           mat-raised-button
-          [disabled]="!loginForm.valid"
+          [disabled]="!loginForm.valid || password.length <= 5"
           type="submit"
           color="primary"
         >
