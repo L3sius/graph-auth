@@ -1,1 +1,201 @@
-<p>register-page works!</p>
+<section class="layout">
+  <div class="header">
+    <div class="child"><p class="customP">Have an account?</p></div>
+    <div class="child">
+      <button
+        id="cardButton"
+        mat-raised-button
+        color="primary"
+        routerLink="/login-page"
+      >
+        LOGIN
+      </button>
+    </div>
+  </div>
+
+  <div class="main">
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <div id="card">
+        <h1 id="customTitle">Create an account</h1>
+
+        <div class="flex-container">
+          <div class="flex-child magenta">
+            <mat-label>Enter your name: </mat-label>
+            <mat-form-field appearance="outline" [style.width.px]="300">
+              <input matInput placeholder="Name" formControlName="name" />
+              <mat-hint *ngIf="registerForm.get('name').hasError('required')"
+                >Name is required</mat-hint
+              >
+              <mat-error *ngIf="registerForm.get('name').hasError('required')"
+                >Name is required</mat-error
+              ></mat-form-field
+            >
+          </div>
+
+          <div class="flex-child green">
+            <mat-label>Enter your surname: </mat-label>
+            <mat-form-field appearance="outline" [style.width.px]="300">
+              <input matInput placeholder="Surname" formControlName="surname" />
+              <mat-hint *ngIf="registerForm.get('surname').hasError('required')"
+                >Surname is required</mat-hint
+              >
+              <mat-error
+                *ngIf="registerForm.get('surname').hasError('required')"
+                >Surname is required</mat-error
+              >
+            </mat-form-field>
+          </div>
+        </div>
+
+        <!-- <div class="form-group">
+          <mat-label>Enter your name: </mat-label>
+          <mat-form-field appearance="outline" [style.width.px]="300">
+            <input matInput placeholder="Name" formControlName="name" />
+            <mat-hint *ngIf="registerForm.get('name').hasError('required')"
+              >Name is required</mat-hint
+            >
+            <mat-error *ngIf="registerForm.get('name').hasError('required')"
+              >Name is required</mat-error
+            ></mat-form-field
+          ><mat-label>Enter your surname: </mat-label>
+          <mat-form-field appearance="outline" [style.width.px]="300">
+            <input matInput placeholder="Surname" formControlName="surname" />
+            <mat-hint *ngIf="registerForm.get('surname').hasError('required')"
+              >Surname is required</mat-hint
+            >
+            <mat-error *ngIf="registerForm.get('surname').hasError('required')"
+              >Surname is required</mat-error
+            >
+          </mat-form-field>
+        </div> -->
+
+        <div class="form-group" style="align-items: center">
+          <mat-label>Enter your email: </mat-label>
+          <mat-form-field appearance="outline" [style.width.px]="300">
+            <input matInput placeholder="Email" formControlName="email" />
+            <mat-hint *ngIf="registerForm.get('email').hasError('required')"
+              >Email is required</mat-hint
+            >
+            <mat-error *ngIf="registerForm.get('email').hasError('required')"
+              >Email is required</mat-error
+            >
+            <mat-error *ngIf="registerForm.get('email').hasError('email')"
+              >Email should follow structure: email@domain</mat-error
+            >
+          </mat-form-field>
+        </div>
+
+        <div class="form-group" style="align-items: center">
+          <mat-label>Select your category: </mat-label>
+          <mat-form-field appearance="outline" [style.width.px]="300">
+            <mat-select
+              (selectionChange)="onSelectChange($event)"
+              id="categorySelect"
+              disableOptionCentering
+              placeholder="Category"
+              formControlName="category"
+            >
+              <mat-option
+                *ngFor="let category of categories"
+                [value]="category.value"
+                [disabled]="!category.isEnabled"
+              >
+                {{ category.viewValue }}
+              </mat-option>
+            </mat-select>
+            <mat-hint *ngIf="registerForm.get('category').hasError('required')"
+              >Category is required</mat-hint
+            >
+            <mat-error *ngIf="registerForm.get('category').hasError('required')"
+              >Category is required</mat-error
+            >
+          </mat-form-field>
+        </div>
+
+        <mat-label
+          style="color: #707070; font-size: 13px"
+          [hidden]="!selectedType"
+          >Select 6 images:
+        </mat-label>
+        <mat-label
+          style="color: lightgrey; font-size: 10px; text-decoration: underline"
+          [hidden]="!selectedType"
+          matTooltipPosition="right"
+          matTooltip="In order to create a password - select at least 6 images. The order of selection is important!"
+        >
+          What's this?
+        </mat-label>
+        <div class="imageContainer" *ngIf="selectedType === 'animals'">
+          <label
+            formArrayName="images"
+            *ngFor="let image of imagesFormArray.controls; let i = index"
+          >
+            <input
+              style="display: none"
+              type="checkbox"
+              [formControlName]="i"
+              (change)="onCheckboxChange(i, $event)"
+            />
+            <div class="imgHolder">
+              <img
+                width="100"
+                height="100"
+                alt="Image of an animal"
+                src="{{ animalsData[i].url }}"
+              />
+              <ng-container *ngFor="let id of password; let j = index">
+                <span
+                  matBadge="{{ j + 1 }}"
+                  matBadgePosition="before"
+                  matBadgeColor="primary"
+                  *ngIf="i === id"
+                ></span>
+              </ng-container>
+            </div>
+          </label>
+        </div>
+
+        <div class="imageContainer" *ngIf="selectedType === 'food'">
+          <label
+            formArrayName="images"
+            *ngFor="let image of imagesFormArray.controls; let i = index"
+          >
+            <input
+              style="display: none"
+              type="checkbox"
+              [formControlName]="i"
+              (change)="onCheckboxChange(i, $event)"
+            />
+            <div class="imgHolder">
+              <img
+                width="100"
+                height="100"
+                style="margin: 0 5px 0 5px"
+                alt="Image of a food"
+                src="{{ foodData[i].url }}"
+              />
+              <ng-container *ngFor="let id of password; let j = index">
+                <span
+                  matBadge="{{ j + 1 }}"
+                  matBadgePosition="before"
+                  matBadgeColor="primary"
+                  *ngIf="i === id"
+                ></span>
+              </ng-container>
+            </div>
+          </label>
+        </div>
+
+        <button
+          id="cardButton"
+          mat-raised-button
+          [disabled]="!registerForm.valid || password.length <= 5"
+          type="submit"
+          color="primary"
+        >
+          REGISTER
+        </button>
+      </div>
+    </form>
+  </div>
+</section>

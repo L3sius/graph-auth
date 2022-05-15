@@ -15,6 +15,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatBadgeModule } from '@angular/material/badge';
 import { TwofactorActivationPageComponent } from './twofactor-activation-page/twofactor-activation-page.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { TwofactorActivationPageComponent } from './twofactor-activation-page/tw
     MatInputModule,
     MatSelectModule,
     MatBadgeModule,
+    MatTooltipModule,
   ],
   exports: [MatButtonModule, BrowserAnimationsModule],
   providers: [],
