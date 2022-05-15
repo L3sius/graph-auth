@@ -134,6 +134,15 @@ export class LoginPageComponent {
     });
   }
 
+  updateBorderColor(element: string, isChecked: boolean) {
+    var selectedImage = document.getElementById(element);
+    if (isChecked) {
+      selectedImage.style.border = '3px solid #00adb5';
+    } else {
+      selectedImage.style.border = '3px solid black';
+    }
+  }
+
   onSelectChange(event: any) {
     this.selectedType = event.value;
     this.unCheckAll();
@@ -146,6 +155,7 @@ export class LoginPageComponent {
   }
 
   onCheckboxChange(id: any, event: any) {
+    this.updateBorderColor(id, event.target.checked);
     this.updatePasswordArray(id, event.target.checked);
   }
 

@@ -155,6 +155,7 @@ export class RegisterPageComponent implements OnInit {
   }
 
   onCheckboxChange(id: any, event: any) {
+    this.updateBorderColor(id, event.target.checked);
     this.updatePasswordArray(id, event.target.checked);
   }
 
@@ -168,8 +169,16 @@ export class RegisterPageComponent implements OnInit {
     this.foodData.forEach(() => this.imagesFormArray.clear());
   }
 
+  updateBorderColor(element: string, isChecked: boolean) {
+    var selectedImage = document.getElementById(element);
+    if (isChecked) {
+      selectedImage.style.border = '3px solid #00adb5';
+    } else {
+      selectedImage.style.border = '3px solid black';
+    }
+  }
+
   updatePasswordArray(element: number, isChecked: boolean) {
-    console.log(element);
     if (isChecked) {
       this.password.push(element);
     } else {

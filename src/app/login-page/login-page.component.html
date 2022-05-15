@@ -78,6 +78,7 @@
                 height="100"
                 style="margin: 0 5px 0 5px"
                 alt="Image of an animal"
+                id="{{ i }}"
                 src="{{ animalsData[i].url }}"
               />
               <ng-container *ngFor="let id of password; let j = index">
@@ -109,6 +110,7 @@
                 height="100"
                 style="margin: 0 5px 0 5px"
                 alt="Image of a food"
+                id="{{ i }}"
                 src="{{ foodData[i].url }}"
               />
               <ng-container *ngFor="let id of password; let j = index">
