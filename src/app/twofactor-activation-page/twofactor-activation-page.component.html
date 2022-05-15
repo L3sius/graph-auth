@@ -1,0 +1,56 @@
+<section class="layout">
+  <div class="header">
+    <div class="child">
+      <button
+        id="cardButton"
+        mat-raised-button
+        color="primary"
+        routerLink="/login-page"
+      >
+        LOGOUT
+      </button>
+    </div>
+  </div>
+
+  <div class="main">
+    <div id="card">
+      <h1 id="customTitle">
+        Activation code was sent to your email, please input it below to
+        activate two-factor authentication on your account
+      </h1>
+      <form [formGroup]="activationForm" (ngSubmit)="onSubmit()">
+        <div class="form-group" style="align-items: center">
+          <mat-label>Enter your activation code: </mat-label>
+          <mat-form-field appearance="outline" [style.width.px]="300">
+            <input
+              matInput
+              placeholder="Activation code"
+              formControlName="code"
+            />
+            <mat-hint *ngIf="activationForm.get('code').hasError('required')"
+              >Activation code is required</mat-hint
+            >
+            <mat-error *ngIf="activationForm.get('code').hasError('required')"
+              >Activation code is required</mat-error
+            >
+            <mat-error *ngIf="activationForm.get('code').hasError('pattern')"
+              >Only numbers are allowed</mat-error
+            >
+            <mat-error *ngIf="activationForm.get('code').errors"
+              >Activation code should be 6 numbers long</mat-error
+            >
+          </mat-form-field>
+        </div>
+        <button
+          id="cardButton"
+          mat-raised-button
+          type="submit"
+          color="primary"
+          [disabled]="!activationForm.valid"
+        >
+          SUBMIT
+        </button>
+      </form>
+    </div>
+  </div>
+</section>

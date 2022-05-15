@@ -188,7 +188,7 @@ export class LoginPageComponent {
 
     console.log(loginContent);
 
-    this.router.navigate(['home-page']);
+    // this.router.navigate(['home-page']);
 
     //TODO: Add authentication later
     //this.authService.logIn(user).subscribe(

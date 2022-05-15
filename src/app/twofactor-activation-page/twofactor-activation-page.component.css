@@ -44,12 +44,24 @@
   margin-block-end: 0.67em;
 }
 
-#customHomeTitle {
-  background-color: #00adb5;
-  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
-  border-radius: 25px;
-  padding: 20px 50px 20px 50px;
-  color: #ffffff;
-  font-weight: bold;
-  font-size: 26px;
+.form {
+  position: relative;
+  width: 100%;
+  z-index: 1;
+  padding: 20px;
+  background-color: #dbc7da;
+  border: #191016;
+  border-style: solid;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-group {
+  color: #707070;
+  font-size: 13px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
 }

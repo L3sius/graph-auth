@@ -14,6 +14,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatBadgeModule } from '@angular/material/badge';
+import { TwofactorActivationPageComponent } from './twofactor-activation-page/twofactor-activation-page.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { MatBadgeModule } from '@angular/material/badge';
     LandingPageComponent,
     RegisterPageComponent,
     HomePageComponent,
+    TwofactorActivationPageComponent,
   ],
   imports: [
     BrowserModule,
