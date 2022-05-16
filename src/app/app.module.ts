@@ -23,7 +23,11 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
-import { AngularFireAnalyticsModule } from '@angular/fire/compat/analytics';
+import {
+  AngularFireAnalyticsModule,
+  ScreenTrackingService,
+  UserTrackingService,
+} from '@angular/fire/compat/analytics';
 
 @NgModule({
   declarations: [
@@ -55,7 +59,7 @@ import { AngularFireAnalyticsModule } from '@angular/fire/compat/analytics';
     AngularFireAnalyticsModule,
   ],
   exports: [MatButtonModule, BrowserAnimationsModule],
-  providers: [AuthService],
+  providers: [AuthService, ScreenTrackingService, UserTrackingService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

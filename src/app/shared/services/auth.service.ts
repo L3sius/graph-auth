@@ -7,21 +7,20 @@ import {
 } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { User } from './user';
-import * as firebase from 'firebase/compat';
+import { AngularFireAnalytics } from '@angular/fire/compat/analytics';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private analytics: any;
   userData: any; // Save logged in user data
   constructor(
     public afs: AngularFirestore, // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
     public router: Router,
-    public ngZone: NgZone // NgZone service to remove outside scope warning
+    public ngZone: NgZone, // NgZone service to remove outside scope warning
+    public analytics: AngularFireAnalytics
   ) {
-    this.analytics = firebase.default.analytics();
     /* Saving user data in localstorage when 
     logged in and setting up null when logged out */
     this.afAuth.authState.subscribe((user) => {
@@ -43,6 +42,7 @@ export class AuthService {
         this.ngZone.run(() => {
           this.router.navigate(['home-page']);
         });
+        this.analytics.logEvent('SignIn', {});
         this.SetUserData(result.user);
       })
       .catch((error) => {
@@ -116,7 +116,7 @@ export class AuthService {
     });
   }
 
-  logEvents(eventName: String): void {
+  logEvents(eventName: string): void {
     // shared method to log the events
     this.analytics.logEvent(eventName);
   }
