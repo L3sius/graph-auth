@@ -28,6 +28,7 @@ import {
   ScreenTrackingService,
   UserTrackingService,
 } from '@angular/fire/compat/analytics';
+import { AuthGuard } from './shared/guard/auth.guard';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,12 @@ import {
     AngularFireAnalyticsModule,
   ],
   exports: [MatButtonModule, BrowserAnimationsModule],
-  providers: [AuthService, ScreenTrackingService, UserTrackingService],
+  providers: [
+    AuthService,
+    ScreenTrackingService,
+    UserTrackingService,
+    AuthGuard,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

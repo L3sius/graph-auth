@@ -169,7 +169,6 @@ export class LoginPageComponent {
   }
 
   updatePasswordArray(element: number, isChecked: boolean) {
-    console.log(element);
     if (isChecked) {
       this.password.push(element);
     } else {

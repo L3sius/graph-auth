@@ -93,7 +93,7 @@
         <mat-label
           style="color: #707070; font-size: 13px"
           [hidden]="!selectedType"
-          >Select 6 images:
+          >Select 5 images:
         </mat-label>
         <mat-label
           style="color: lightgrey; font-size: 10px; text-decoration: underline"
@@ -169,7 +169,7 @@
         <button
           id="cardButton"
           mat-raised-button
-          [disabled]="!registerForm.valid || password.length <= 5"
+          [disabled]="!registerForm.valid || password.length <= 4"
           type="submit"
           color="primary"
         >

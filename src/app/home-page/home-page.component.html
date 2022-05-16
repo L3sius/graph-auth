@@ -5,7 +5,7 @@
         id="cardButton"
         mat-raised-button
         color="primary"
-        routerLink="/login-page"
+        (click)="authService.SignOut()"
       >
         LOGOUT
       </button>
@@ -15,18 +15,34 @@
   <div class="main">
     <div id="card">
       <h1 id="customHomeTitle">YOUR LOGIN WAS SUCCESSFUL</h1>
-      <h1 id="customTitle">
-        Would you like to activate two-factor authentication?
-      </h1>
-      <button
-        id="cardButton"
-        mat-raised-button
-        type="submit"
-        color="primary"
-        routerLink="/activation-page"
-      >
-        ACTIVATE
-      </button>
+      <div *ngIf="!currentUserAuthenticatorStatus">
+        <h1 id="customTitle">
+          Would you like to activate two-factor authentication?
+        </h1>
+        <button
+          id="cardButton"
+          mat-raised-button
+          type="submit"
+          color="primary"
+          (click)="changeTwoFactorStatus(true)"
+        >
+          ACTIVATE
+        </button>
+      </div>
+      <div *ngIf="currentUserAuthenticatorStatus">
+        <h1 id="customTitle">
+          Would you like to deactivate two-factor authentication?
+        </h1>
+        <button
+          id="cardButton"
+          mat-raised-button
+          type="submit"
+          color="primary"
+          (click)="changeTwoFactorStatus(false)"
+        >
+          DEACTIVATE
+        </button>
+      </div>
     </div>
   </div>
 </section>
