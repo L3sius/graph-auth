@@ -40,7 +40,7 @@ export class TwofactorActivationPageComponent implements OnInit {
       Body: `
     <i>Your authentication code is below, please input it to finish your login.</i> <br/> <b>Token: </b> ${this.token} <br />`,
     }).then((message: any) => {
-      alert(message);
+      console.log(message);
     });
   }
 
