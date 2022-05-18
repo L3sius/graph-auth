@@ -116,6 +116,8 @@ export class RegisterPageComponent implements OnInit {
 
   selectedType = '';
   password = new Array();
+  isFirstInput = true;
+  temporaryPassword: any;
 
   //TODO: Add authentication
   //private token: string;
@@ -201,14 +203,29 @@ export class RegisterPageComponent implements OnInit {
     var category = this.registerForm.get('category').value;
     var password = this.password.toString().replace(/,/g, '');
 
-    var registerContent: RegisterContent = {
-      name,
-      surname,
-      email,
-      category,
-      password,
-    };
+    console.log('this is old password' + password);
+    if (this.isFirstInput) {
+      this.isFirstInput = false;
+      this.temporaryPassword = password;
+      alert('Please repeat your password one more time');
+      this.unCheckAll();
+      console.log('this is temporary psw' + this.temporaryPassword);
+    } else {
+      if (this.temporaryPassword === password) {
+        var registerContent: RegisterContent = {
+          name,
+          surname,
+          email,
+          category,
+          password,
+        };
 
-    this.authService.SignUp(email, category + password);
+        this.authService.SignUp(email, category + password);
+      } else {
+        alert('Passwords do not match, please input your new password again');
+        this.isFirstInput = true;
+        this.unCheckAll();
+      }
+    }
   }
 }
