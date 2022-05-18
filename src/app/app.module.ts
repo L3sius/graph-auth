@@ -29,6 +29,7 @@ import {
   UserTrackingService,
 } from '@angular/fire/compat/analytics';
 import { AuthGuard } from './shared/guard/auth.guard';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { AuthGuard } from './shared/guard/auth.guard';
     AngularFireStorageModule,
     AngularFireDatabaseModule,
     AngularFireAnalyticsModule,
+    HttpClientModule,
   ],
   exports: [MatButtonModule, BrowserAnimationsModule],
   providers: [

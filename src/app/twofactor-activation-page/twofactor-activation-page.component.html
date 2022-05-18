@@ -15,8 +15,8 @@
   <div class="main">
     <div id="card">
       <h1 id="customTitle">
-        Activation code was sent to your email, please input it below to
-        activate two-factor authentication on your account
+        Activation code was sent to your email address, please input it below to
+        complete two-factor authentication
       </h1>
       <form [formGroup]="activationForm" (ngSubmit)="onSubmit()">
         <div class="form-group" style="align-items: center">
@@ -51,6 +51,29 @@
           SUBMIT
         </button>
       </form>
+
+      <!-- <div [hidden]="user">
+        <h1>Sign In with Your Phone Number</h1>
+
+        <label for="phone">Phone Number</label><br />
+
+        <div id="recaptcha-container"></div>
+
+        <button (click)="sendLoginCode()">SMS Text Login Code</button>
+
+        <div *ngIf="windowRef.confirmationResult">
+          <hr />
+          <label for="code">Enter your Verification Code Here</label><br />
+          <input type="text" name="code" />
+
+          <button (click)="verifyLoginCode()">Verify</button>
+        </div>
+      </div>
+
+      <div *ngIf="user">
+        You have successfully logged in with your phone number! UserId:
+        {{ user?.uid }}
+      </div> -->
     </div>
   </div>
 </section>

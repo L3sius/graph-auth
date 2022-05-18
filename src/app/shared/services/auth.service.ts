@@ -39,11 +39,15 @@ export class AuthService {
       }
     });
   }
+
   async getUsers() {
+    //TODO Get one user
+    // console.log(await this.databaseService.getUserById(this.user.uid));
     this.allUsers = await this.databaseService.getAllUsers();
     console.log(this.allUsers);
+    console.log(this.user);
     if (
-      this.allUsers.find((obj: any) => obj.id === this.user).twoFactorStatus
+      this.allUsers.find((obj: any) => obj.id === this.user.uid).twoFactorStatus
     ) {
       console.log('I came here');
       this.currentUserAuthenticatorStatus = true;
@@ -61,12 +65,21 @@ export class AuthService {
     return this.afAuth
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
-        this.ngZone.run(() => {
-          this.router.navigate(['home-page']);
-        });
         this.analytics.logEvent('SignIn', { value: 'Successful' });
         this.SetUserData(result.user).then(() => {
           this.user = this.getUserfromLocalStorage();
+          this.getUsers().then(() => {
+            this.ngZone.run(() => {
+              console.log(
+                'auth status is ' + this.currentUserAuthenticatorStatus
+              );
+              if (this.currentUserAuthenticatorStatus) {
+                this.router.navigate(['activation-page']);
+              } else {
+                this.router.navigate(['home-page']);
+              }
+            });
+          });
         });
       })
       .catch((error) => {
