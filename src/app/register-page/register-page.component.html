@@ -112,13 +112,13 @@
               style="display: none"
               type="checkbox"
               [formControlName]="i"
-              (change)="onCheckboxChange(i, $event)"
+              (change)="onCheckboxChange(animalsData[i].id, $event)"
             />
             <div class="imgHolder">
               <img
                 width="100"
                 height="100"
-                id="{{ i }}"
+                id="{{ animalsData[i].id }}"
                 alt="Image of an animal"
                 src="{{ animalsData[i].url }}"
               />
@@ -127,7 +127,7 @@
                   matBadge="{{ j + 1 }}"
                   matBadgePosition="before"
                   matBadgeColor="primary"
-                  *ngIf="i === id"
+                  *ngIf="animalsData[i].id === id"
                 ></span>
               </ng-container>
             </div>
@@ -143,14 +143,14 @@
               style="display: none"
               type="checkbox"
               [formControlName]="i"
-              (change)="onCheckboxChange(i, $event)"
+              (change)="onCheckboxChange(foodData[i].id, $event)"
             />
             <div class="imgHolder">
               <img
                 width="100"
                 height="100"
                 style="margin: 0 5px 0 5px"
-                id="{{ i }}"
+                id="{{ foodData[i].id }}"
                 alt="Image of a food"
                 src="{{ foodData[i].url }}"
               />
@@ -159,7 +159,7 @@
                   matBadge="{{ j + 1 }}"
                   matBadgePosition="before"
                   matBadgeColor="primary"
-                  *ngIf="i === id"
+                  *ngIf="foodData[i].id === id"
                 ></span>
               </ng-container>
             </div>

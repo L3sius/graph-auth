@@ -70,7 +70,7 @@
               style="display: none"
               type="checkbox"
               [formControlName]="i"
-              (change)="onCheckboxChange(i, $event)"
+              (change)="onCheckboxChange(animalsData[i].id, $event)"
             />
             <div class="imgHolder">
               <img
@@ -78,7 +78,7 @@
                 height="100"
                 style="margin: 0 5px 0 5px"
                 alt="Image of an animal"
-                id="{{ i }}"
+                id="{{ animalsData[i].id }}"
                 src="{{ animalsData[i].url }}"
               />
               <ng-container *ngFor="let id of password; let j = index">
@@ -86,7 +86,7 @@
                   matBadge="{{ j + 1 }}"
                   matBadgePosition="before"
                   matBadgeColor="primary"
-                  *ngIf="i === id"
+                  *ngIf="animalsData[i].id === id"
                 ></span>
               </ng-container>
             </div>
@@ -102,7 +102,7 @@
               style="display: none"
               type="checkbox"
               [formControlName]="i"
-              (change)="onCheckboxChange(i, $event)"
+              (change)="onCheckboxChange(foodData[i].id, $event)"
             />
             <div class="imgHolder">
               <img
@@ -110,7 +110,7 @@
                 height="100"
                 style="margin: 0 5px 0 5px"
                 alt="Image of a food"
-                id="{{ i }}"
+                id="{{ foodData[i].id }}"
                 src="{{ foodData[i].url }}"
               />
               <ng-container *ngFor="let id of password; let j = index">
@@ -118,7 +118,7 @@
                   matBadge="{{ j + 1 }}"
                   matBadgePosition="before"
                   matBadgeColor="primary"
-                  *ngIf="i === id"
+                  *ngIf="foodData[i].id === id"
                 ></span>
               </ng-container>
             </div>

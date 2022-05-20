@@ -20,86 +20,86 @@ export class LoginPageComponent {
   @ViewChildren('checkboxes') checkboxes: QueryList<ElementRef>;
   foodData = [
     {
-      id: 1,
+      id: 0,
       url: 'https://res.cloudinary.com/dajxgd8au/image/upload/c_scale,h_200,w_200/v1652451277/food/food1_ubiq8s.jpg',
     },
     {
-      id: 2,
+      id: 1,
       url: 'https://res.cloudinary.com/dajxgd8au/image/upload/c_scale,h_200,w_200/v1652451276/food/food2_lgrcwa.jpg',
     },
     {
-      id: 3,
+      id: 2,
       url: 'https://res.cloudinary.com/dajxgd8au/image/upload/c_scale,h_200,w_200/v1652451276/food/food3_blgryb.jpg',
     },
     {
-      id: 4,
+      id: 3,
       url: 'https://res.cloudinary.com/dajxgd8au/image/upload/c_scale,h_200,w_200/v1652451277/food/food4_zuyb3s.jpg',
     },
     {
-      id: 5,
+      id: 4,
       url: 'https://res.cloudinary.com/dajxgd8au/image/upload/c_scale,h_200,w_200/v1652451277/food/food5_shun2m.jpg',
     },
     {
-      id: 6,
+      id: 5,
       url: 'https://res.cloudinary.com/dajxgd8au/image/upload/c_scale,h_200,w_200/v1652451277/food/food6_r76jpx.jpg',
     },
     {
-      id: 7,
+      id: 6,
       url: 'https://res.cloudinary.com/dajxgd8au/image/upload/c_scale,h_200,w_200/v1652451278/food/food7_ogxwu0.jpg',
     },
     {
-      id: 8,
+      id: 7,
       url: 'https://res.cloudinary.com/dajxgd8au/image/upload/c_scale,h_200,w_200/v1652451277/food/food8_tj8oo9.jpg',
     },
     {
-      id: 9,
+      id: 8,
       url: 'https://res.cloudinary.com/dajxgd8au/image/upload/c_scale,h_200,w_200/v1652451277/food/food9_xkqddv.jpg',
     },
     {
-      id: 10,
+      id: 9,
       url: 'https://res.cloudinary.com/dajxgd8au/image/upload/c_scale,h_200,w_200/v1652451278/food/food10_mmbrrw.jpg',
     },
   ];
 
   animalsData = [
     {
-      id: 1,
+      id: 0,
       url: 'https://res.cloudinary.com/dajxgd8au/image/upload/c_scale,h_200,w_200/v1652536152/animals/animals1_nysfx6.jpg',
     },
     {
-      id: 2,
+      id: 1,
       url: 'https://res.cloudinary.com/dajxgd8au/image/upload/c_scale,h_200,w_200/v1652536152/animals/animals2_ogym7l.jpg',
     },
     {
-      id: 3,
+      id: 2,
       url: 'https://res.cloudinary.com/dajxgd8au/image/upload/c_scale,h_200,w_200/v1652536152/animals/animals3_tesj2m.jpg',
     },
     {
-      id: 4,
+      id: 3,
       url: 'https://res.cloudinary.com/dajxgd8au/image/upload/c_scale,h_200,w_200/v1652536152/animals/animals4_suqt9e.jpg',
     },
     {
-      id: 5,
+      id: 4,
       url: 'https://res.cloudinary.com/dajxgd8au/image/upload/c_scale,h_200,w_200/v1652536153/animals/animals5_xexvqt.jpg',
     },
     {
-      id: 6,
+      id: 5,
       url: 'https://res.cloudinary.com/dajxgd8au/image/upload/c_scale,h_200,w_200/v1652536152/animals/animals6_eixgce.jpg',
     },
     {
-      id: 7,
+      id: 6,
       url: 'https://res.cloudinary.com/dajxgd8au/image/upload/c_scale,h_200,w_200/v1652536213/animals/animals7_rrbteo.jpg',
     },
     {
-      id: 8,
+      id: 7,
       url: 'https://res.cloudinary.com/dajxgd8au/image/upload/c_scale,h_200,w_200/v1652536153/animals/animals8_ac9i89.jpg',
     },
     {
-      id: 9,
+      id: 8,
       url: 'https://res.cloudinary.com/dajxgd8au/image/upload/c_scale,h_200,w_200/v1652536153/animals/animals9_dozkp3.jpg',
     },
     {
-      id: 10,
+      id: 9,
       url: 'https://res.cloudinary.com/dajxgd8au/image/upload/c_scale,h_200,w_200/v1652536153/animals/animals10_vjp1fu.jpg',
     },
   ];
@@ -126,6 +126,9 @@ export class LoginPageComponent {
   constructor(private router: Router, public authService: AuthService) {}
 
   ngOnInit(): void {
+    this.shuffle(this.foodData);
+    this.shuffle(this.animalsData);
+
     this.loginForm = new FormGroup({
       email: new FormControl(null, [Validators.required, Validators.email]),
       category: new FormControl(null, Validators.required),
@@ -133,17 +136,55 @@ export class LoginPageComponent {
     });
   }
 
+  shuffle(array: any) {
+    let currentIndex = array.length,
+      randomIndex;
+
+    // While there remain elements to shuffle.
+    while (currentIndex != 0) {
+      // Pick a remaining element.
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+
+      // And swap it with the current element.
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex],
+        array[currentIndex],
+      ];
+    }
+    return array;
+  }
+
   updateBorderColor(element: string, isChecked: boolean) {
     var selectedImage = document.getElementById(element);
     if (isChecked) {
       selectedImage.style.border = '3px solid #00adb5';
+      selectedImage.style.filter = 'blur(20px)';
+      selectedImage.style.transform = 'scale(0.9)';
     } else {
       selectedImage.style.border = '3px solid black';
+      selectedImage.style.filter = 'blur(0)';
+      selectedImage.style.transform = 'scale(1)';
     }
   }
 
   onSelectChange(event: any) {
     this.selectedType = event.value;
+    switch (this.selectedType) {
+      case 'food': {
+        this.shuffle(this.foodData);
+        break;
+      }
+      case 'animals': {
+        this.shuffle(this.animalsData);
+        break;
+      }
+      default: {
+        console.log('Error, array not found');
+        break;
+      }
+    }
+
     this.unCheckAll();
   }
 
