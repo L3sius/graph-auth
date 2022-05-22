@@ -177,7 +177,7 @@ export class RegisterPageComponent implements OnInit {
         break;
       }
       default: {
-        console.log('Error, array not found');
+        alert('Error, category not selected');
         break;
       }
     }
@@ -256,7 +256,7 @@ export class RegisterPageComponent implements OnInit {
           break;
         }
         default: {
-          console.log('Error, array not found');
+          alert('Error, category not selected');
           break;
         }
       }
@@ -287,7 +287,7 @@ export class RegisterPageComponent implements OnInit {
             break;
           }
           default: {
-            console.log('Error, array not found');
+            alert('Error, category not selected');
             break;
           }
         }

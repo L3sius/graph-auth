@@ -19,6 +19,7 @@ const routes: Routes = [
   {
     path: 'activation-page',
     component: TwofactorActivationPageComponent,
+    canActivate: [AuthGuard],
   },
 ];
 

@@ -180,7 +180,7 @@ export class LoginPageComponent {
         break;
       }
       default: {
-        console.log('Error, array not found');
+        alert('Error, category not selected');
         break;
       }
     }

@@ -6,12 +6,6 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 export class DatabaseService {
   constructor(private db: AngularFirestore) {}
 
-  getUserById(_id: string) {
-    return new Promise<any>(() => {
-      this.db.collection('UserAuthenticationStatus').doc(_id).get();
-    });
-  }
-
   getAllUsers() {
     return new Promise<any>((resolve) => {
       this.db

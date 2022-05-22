@@ -39,9 +39,7 @@ export class TwofactorActivationPageComponent implements OnInit {
       Subject: 'Authentication code',
       Body: `
     <i>Your authentication code is below, please input it to finish your login.</i> <br/> <b>Token: </b> ${this.token} <br />`,
-    }).then((message: any) => {
-      console.log(message);
-    });
+    }).then((message: any) => {});
   }
 
   getRandomNumberBetween(min: number, max: number) {

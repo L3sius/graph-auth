@@ -41,20 +41,14 @@ export class AuthService {
   }
 
   async getUsers() {
-    //TODO Get one user
-    // console.log(await this.databaseService.getUserById(this.user.uid));
     this.allUsers = await this.databaseService.getAllUsers();
-    console.log(this.allUsers);
-    console.log(this.user);
     if (
       this.allUsers.find((obj: any) => obj.id === this.user.uid).twoFactorStatus
     ) {
-      console.log('I came here');
       this.currentUserAuthenticatorStatus = true;
     } else {
       this.currentUserAuthenticatorStatus = false;
     }
-    console.log(this.currentUserAuthenticatorStatus);
   }
 
   getUserfromLocalStorage() {
@@ -70,9 +64,6 @@ export class AuthService {
           this.user = this.getUserfromLocalStorage();
           this.getUsers().then(() => {
             this.ngZone.run(() => {
-              console.log(
-                'auth status is ' + this.currentUserAuthenticatorStatus
-              );
               if (this.currentUserAuthenticatorStatus) {
                 this.router.navigate(['activation-page']);
               } else {
@@ -131,8 +122,8 @@ export class AuthService {
 
   // Returns true when user is logged in
   get isLoggedIn(): boolean {
-    // const user = JSON.parse(localStorage.getItem('user')!);
-    return this.user !== null ? true : false;
+    const user = JSON.parse(localStorage.getItem('user')!);
+    return user !== null ? true : false;
   }
 
   SetUserData(user: any) {

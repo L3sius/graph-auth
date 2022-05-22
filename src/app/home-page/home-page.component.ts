@@ -45,7 +45,6 @@ export class HomePageComponent implements OnInit {
   }
 
   changeTwoFactorStatus(status: boolean) {
-    console.log('status came ' + status);
     this.user = JSON.parse(localStorage.getItem('user')!);
     this.databaseService.updateTwoFactorAuthenticationStatus(
       this.user.uid,
